@@ -1,0 +1,67 @@
+
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Cryptocurrency Market Scanner</title>
+    <style>
+        .green {
+            background-color: green;
+            color: white;
+        }
+        .white {
+            background-color: white;
+            color: black;
+        }
+        th, td {
+            padding: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+
+<body>
+
+    <div style="text-align:center;">
+      <h1>Market Scanner</h1>
+
+      <table border="1">
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Symbol</th>
+                  <th>Price (USD)</th>
+                  <th>24 Hour Volume</th>
+                  <th>Circulating Supply</th>
+                  <th>Relative Volume</th>
+                  <th>Gap %</th>
+                  <th>5 min. Price Change</th>
+                  <th>10 min. Price Change</th>
+                  <th>1 hr Price Change</th>
+                  <th>% Change from Close (rolling 24hr)</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for crypto in top_cryptos %}
+            <tr class="{{ crypto.row_class }}">
+                <td>{{ crypto.name }}</td>
+                <td>{{ crypto.symbol }}</td>
+                <td>{{ crypto.last_price }}</td>
+                <td>{{ crypto.volume_24hr }}</td>
+                <td>{{ crypto.circulating_supply }}</td>
+                <td>{{ crypto.relative_volume|floatformat:2 }}</td>
+                <td>{{ crypto.gap_percentage }}</td>
+                <td>{{ crypto.price_change_5min|floatformat:2 }}%</td>
+                <td>{{ crypto.price_change_10min|floatformat:2 }}%</td>
+                <td>{{ crypto.price_change_1hr|floatformat:2 }}%</td>
+                <td>{{ crypto.price_change_24hr|floatformat:2 }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+</body>
+
+{% endblock %}

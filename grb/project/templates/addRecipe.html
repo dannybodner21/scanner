@@ -1,0 +1,1095 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Add recipes!</title>
+{% endblock %}
+
+{% block body %}
+
+    <style>
+      .formInput {
+        padding-left:25px;
+      }
+      .addRecipeForm {
+        margin-top:40px;
+        text-align:left;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .button {
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width:100%;
+        margin-top:30px;
+      }
+      button:hover {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+      }
+    </style>
+
+    <div style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
+      <h1 style="text-align:center;">Add a New Recipe</h1>
+
+
+
+
+      <form class="addRecipeForm" action="addRecipe" method="post">
+        {% csrf_token %}
+
+        <div>
+          <label>Recipe Title:</label>
+          <br>
+          <div class="formInput" name="" placeholder="">{{ form.title }}</div>
+        </div>
+        <div>
+          <label>Prep Time (Minutes):</label>
+          <br>
+          <div class="formInput">{{ form.prepMinutes }}</div>
+        </div>
+        <div>
+          <label>Cook Time (Minutes):</label>
+          <br>
+          <div class="formInput">{{ form.cookMinutes }}</div>
+        </div>
+        <div>
+          <label>Servings:</label>
+          <br>
+          <div class="formInput">{{ form.servings }}</div>
+        </div>
+        <div>
+          <label>Ingredients:</label>
+          <br>
+          <div class="formInput">{{ form.ingredients }}</div>
+        </div>
+        <div>
+          <label>Instructions:</label>
+          <br>
+          <div class="formInput">{{ form.instructions }}</div>
+        </div>
+
+        <button class="button" type="submit" value="submit">
+          Submit
+        </button>
+
+      </form>
+
+    </div>
+
+
+
+
+
+
+
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function () {
+
+    	// variables
+      let tierOneAffiliateOne = {exists:false, week:1, pack:'pro'};
+      let tierOneAffiliateTwo = {exists:false, week:1, pack:'pro'};
+      let tierOneAffiliateThree = {exists:false, week:1, pack:'pro'};
+      let tierOneAffiliateFour = {exists:false, week:1, pack:'pro'};
+
+      let tierTwoAffiliateOne = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateTwo = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateThree = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateFour = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateFive = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateSix = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateSeven = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateEight = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateNine = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateTen = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateEleven = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateTwelve = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateThirteen = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateFourteen = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateFifteen = {exists:false, week:1, pack:'pro'};
+      let tierTwoAffiliateSixteen = {exists:false, week:1, pack:'pro'};
+
+
+    	// tier one dropdown - amount of tier one affiliates
+    	const tierOneDropdown = document.querySelector('[data-dropdown="tier-one-amount"]');
+
+    	// tier one affiliate divs
+    	const tierOneAffiliateOneDiv = document.querySelector('[data-affiliate="1"]');
+    	const tierOneAffiliateTwoDiv = document.querySelector('[data-affiliate="2"]');
+    	const tierOneAffiliateThreeDiv = document.querySelector('[data-affiliate="3"]');
+    	const tierOneAffiliateFourDiv = document.querySelector('[data-affiliate="4"]');
+
+      // tier two dropdown
+     	const tierTwoDropdown = document.querySelector('[data-dropdown="tier-two-amount"]');
+
+      // tier two label
+      const tierTwoLabel = document.querySelector('[data-tier-two-label="for-each-affiliate"]');
+
+      // tier two affiliate divs
+    	const tierTwoAffiliateOneDiv = document.querySelector('[data-affiliate-two="1"]');
+    	const tierTwoAffiliateTwoDiv = document.querySelector('[data-affiliate-two="2"]');
+    	const tierTwoAffiliateThreeDiv = document.querySelector('[data-affiliate-two="3"]');
+    	const tierTwoAffiliateFourDiv = document.querySelector('[data-affiliate-two="4"]');
+      const tierTwoAffiliateFiveDiv = document.querySelector('[data-affiliate-two="5"]');
+      const tierTwoAffiliateSixDiv = document.querySelector('[data-affiliate-two="6"]');
+     	const tierTwoAffiliateSevenDiv = document.querySelector('[data-affiliate-two="7"]');
+     	const tierTwoAffiliateEightDiv = document.querySelector('[data-affiliate-two="8"]');
+     	const tierTwoAffiliateNineDiv = document.querySelector('[data-affiliate-two="9"]');
+     	const tierTwoAffiliateTenDiv = document.querySelector('[data-affiliate-two="10"]');
+      const tierTwoAffiliateElevenDiv = document.querySelector('[data-affiliate-two="11"]');
+      const tierTwoAffiliateTwelveDiv = document.querySelector('[data-affiliate-two="12"]');
+      const tierTwoAffiliateThirteenDiv = document.querySelector('[data-affiliate-two="13"]');
+      const tierTwoAffiliateFourteenDiv = document.querySelector('[data-affiliate-two="14"]');
+      const tierTwoAffiliateFifteenDiv = document.querySelector('[data-affiliate-two="15"]');
+      const tierTwoAffiliateSixteenDiv = document.querySelector('[data-affiliate-two="16"]');
+
+      // submit form button
+      const submitButton = document.querySelector('[data-button="submit"]');
+
+
+      // SHOW / HIDE AFFILIATE DIVS ------------------------------
+
+      // hide divs other than the first one
+      tierOneAffiliateOneDiv.style.display = 'block';
+      tierOneAffiliateTwoDiv.style.display = 'none';
+      tierOneAffiliateThreeDiv.style.display = 'none';
+      tierOneAffiliateFourDiv.style.display = 'none';
+
+      // add an event listener to the tier one dropdown
+      tierOneDropdown.addEventListener('change', function () {
+
+        // get the selected value as an int
+        const selectedValue = parseInt(tierOneDropdown.value, 10);
+
+        // show one
+        if (selectedValue == 1) {
+            tierOneAffiliateOneDiv.style.display = 'block';
+            tierOneAffiliateTwoDiv.style.display = 'none';
+            tierOneAffiliateThreeDiv.style.display = 'none';
+            tierOneAffiliateFourDiv.style.display = 'none';
+
+        }
+        // show one and two
+        else if (selectedValue == 2) {
+            tierOneAffiliateOneDiv.style.display = 'block';
+            tierOneAffiliateTwoDiv.style.display = 'block';
+            tierOneAffiliateThreeDiv.style.display = 'none';
+            tierOneAffiliateFourDiv.style.display = 'none';
+
+        }
+        // show one, two and three
+        else if (selectedValue == 3) {
+            tierOneAffiliateOneDiv.style.display = 'block';
+            tierOneAffiliateTwoDiv.style.display = 'block';
+            tierOneAffiliateThreeDiv.style.display = 'block';
+            tierOneAffiliateFourDiv.style.display = 'none';
+
+        }
+        // show all
+        else {
+            tierOneAffiliateOneDiv.style.display = 'block';
+            tierOneAffiliateTwoDiv.style.display = 'block';
+            tierOneAffiliateThreeDiv.style.display = 'block';
+            tierOneAffiliateFourDiv.style.display = 'block';
+        }
+
+      });
+
+      // hide all the tier two divs at start
+      tierTwoLabel.style.display = 'none';
+    	tierTwoAffiliateOneDiv.style.display = 'none';
+    	tierTwoAffiliateTwoDiv.style.display = 'none';
+    	tierTwoAffiliateThreeDiv.style.display = 'none';
+    	tierTwoAffiliateFourDiv.style.display = 'none';
+      tierTwoAffiliateFiveDiv.style.display = 'none';
+      tierTwoAffiliateSixDiv.style.display = 'none';
+      tierTwoAffiliateSevenDiv.style.display = 'none';
+      tierTwoAffiliateEightDiv.style.display = 'none';
+      tierTwoAffiliateNineDiv.style.display = 'none';
+      tierTwoAffiliateTenDiv.style.display = 'none';
+      tierTwoAffiliateElevenDiv.style.display = 'none';
+      tierTwoAffiliateTwelveDiv.style.display = 'none';
+      tierTwoAffiliateThirteenDiv.style.display = 'none';
+      tierTwoAffiliateFourteenDiv.style.display = 'none';
+      tierTwoAffiliateFifteenDiv.style.display = 'none';
+      tierTwoAffiliateSixteenDiv.style.display = 'none';
+
+      // add an event listener to the tier two dropdown
+    	tierTwoDropdown.addEventListener('change', function () {
+
+        // hide all divs when new selection is made
+        tierTwoLabel.style.display = 'none';
+        tierTwoAffiliateOneDiv.style.display = 'none';
+      	tierTwoAffiliateTwoDiv.style.display = 'none';
+      	tierTwoAffiliateThreeDiv.style.display = 'none';
+      	tierTwoAffiliateFourDiv.style.display = 'none';
+        tierTwoAffiliateFiveDiv.style.display = 'none';
+        tierTwoAffiliateSixDiv.style.display = 'none';
+        tierTwoAffiliateSevenDiv.style.display = 'none';
+        tierTwoAffiliateEightDiv.style.display = 'none';
+        tierTwoAffiliateNineDiv.style.display = 'none';
+        tierTwoAffiliateTenDiv.style.display = 'none';
+        tierTwoAffiliateElevenDiv.style.display = 'none';
+        tierTwoAffiliateTwelveDiv.style.display = 'none';
+        tierTwoAffiliateThirteenDiv.style.display = 'none';
+        tierTwoAffiliateFourteenDiv.style.display = 'none';
+        tierTwoAffiliateFifteenDiv.style.display = 'none';
+        tierTwoAffiliateSixteenDiv.style.display = 'none';
+
+      	// get the selected value as an int
+      	const selectedValueTwo = parseInt(tierTwoDropdown.value, 10);
+
+        // if anything other than zero is picked, show label
+        if (selectedValueTwo != 0) {
+          tierTwoLabel.style.display = 'block';
+        }
+
+        // show one
+        if (selectedValueTwo >= 1) {
+        		tierTwoAffiliateOneDiv.style.display = 'block';
+        }
+        // show one and two
+        if (selectedValueTwo >= 2) {
+            tierTwoAffiliateTwoDiv.style.display = 'block';
+        }
+        // show one, two and three
+        if (selectedValueTwo >= 3) {
+    				tierTwoAffiliateThreeDiv.style.display = 'block';
+        }
+        // 4
+        if (selectedValueTwo >= 4) {
+    				tierTwoAffiliateFourDiv.style.display = 'block';
+        }
+        // 5
+        if (selectedValueTwo >= 5) {
+    				tierTwoAffiliateFiveDiv.style.display = 'block';
+        }
+        // 6
+        if (selectedValueTwo >= 6) {
+    				tierTwoAffiliateSixDiv.style.display = 'block';
+        }
+        // 7
+        if (selectedValueTwo >= 7) {
+    				tierTwoAffiliateSevenDiv.style.display = 'block';
+        }
+        // 8
+        if (selectedValueTwo >= 8) {
+    				tierTwoAffiliateEightDiv.style.display = 'block';
+        }
+        // 9
+        if (selectedValueTwo >= 9) {
+    				tierTwoAffiliateNineDiv.style.display = 'block';
+        }
+        // 10
+        if (selectedValueTwo >= 10) {
+    				tierTwoAffiliateTenDiv.style.display = 'block';
+        }
+        // 11
+        if (selectedValueTwo >= 11) {
+    				tierTwoAffiliateElevenDiv.style.display = 'block';
+        }
+        // 12
+        if (selectedValueTwo >= 12) {
+    				tierTwoAffiliateTwelveDiv.style.display = 'block';
+        }
+        // 13
+        if (selectedValueTwo >= 13) {
+    				tierTwoAffiliateThirteenDiv.style.display = 'block';
+        }
+        // 14
+        if (selectedValueTwo >= 14) {
+    				tierTwoAffiliateFourteenDiv.style.display = 'block';
+        }
+        // 15
+        if (selectedValueTwo >= 15) {
+    				tierTwoAffiliateFifteenDiv.style.display = 'block';
+        }
+        // 16
+        if (selectedValueTwo >= 16) {
+    				tierTwoAffiliateSixteenDiv.style.display = 'block';
+        }
+     });
+
+
+      // TIER ONE AFFILIATE DATA ----------------------------------
+
+      // check how many tier one affiliates there are
+      // 1 or greater
+      if (parseInt(tierOneDropdown.value, 10) >= 1) {
+
+        tierOneAffiliateOne.exists = true;
+        tierOneAffiliateOne.week = document.querySelector(
+              '[data-dropdown="tier-one-affiliate-one-week"]');
+        tierOneAffiliateOne.pack = document.querySelector(
+              '[data-dropdown="tier-one-affiliate-one-pack"]');
+      }
+      // 2 or greater
+      if (parseInt(tierOneDropdown.value, 10) >= 2) {
+
+        tierOneAffiliateTwo.exists = true;
+        tierOneAffiliateTwo.week = document.querySelector(
+              '[data-dropdown="tier-one-affiliate-two-week"]');
+        tierOneAffiliateTwo.pack = document.querySelector(
+              '[data-dropdown="tier-one-affiliate-two-pack"]');
+      }
+      // 3 or greater
+      if (parseInt(tierOneDropdown.value, 10) >= 3) {
+
+        tierOneAffiliateThree.exists = true;
+        tierOneAffiliateThree.week = document.querySelector(
+              '[data-dropdown="tier-one-affiliate-three-week"]');
+        tierOneAffiliateThree.pack = document.querySelector(
+              '[data-dropdown="tier-one-affiliate-three-pack"]');
+      }
+      // 4
+      if (parseInt(tierOneDropdown.value, 10) == 4) {
+
+        tierOneAffiliateFour.exists = true;
+        tierOneAffiliateFour.week = document.querySelector(
+              '[data-dropdown="tier-one-affiliate-four-week"]');
+        tierOneAffiliateFour.pack = document.querySelector(
+              '[data-dropdown="tier-one-affiliate-four-pack"]');
+      }
+
+      // combine all tier one affiliates
+      const allTierOneAffiliates = [
+                                    tierOneAffiliateOne,
+                                    tierOneAffiliateTwo,
+                                    tierOneAffiliateThree,
+                                    tierOneAffiliateFour
+                                   ];
+
+
+     // TIER TWO AFFILIATE DATA -----------------------------------
+
+     // update tier two affiliate data
+     if (parseInt(tierTwoDropdown.value, 10) >= 1) {
+       tierTwoAffiliateOne.exists = true;
+       tierTwoAffiliateOne.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-one-week"]');
+       tierTwoAffiliateOne.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-one-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 2) {
+       tierTwoAffiliateTwo.exists = true;
+       tierTwoAffiliateTwo.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-two-week"]');
+       tierTwoAffiliateTwo.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-two-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 3) {
+       tierTwoAffiliateThree.exists = true;
+       tierTwoAffiliateThree.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-three-week"]');
+       tierTwoAffiliateThree.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-three-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 4) {
+       tierTwoAffiliateFour.exists = true;
+       tierTwoAffiliateFour.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-four-week"]');
+       tierTwoAffiliateFour.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-four-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 5) {
+       tierTwoAffiliateFive.exists = true;
+       tierTwoAffiliateFive.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-five-week"]');
+       tierTwoAffiliateFive.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-five-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 6) {
+       tierTwoAffiliateSix.exists = true;
+       tierTwoAffiliateSix.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-six-week"]');
+       tierTwoAffiliateSix.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-six-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 7) {
+       tierTwoAffiliateSeven.exists = true;
+       tierTwoAffiliateSeven.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-seven-week"]');
+       tierTwoAffiliateSeven.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-seven-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 8) {
+       tierTwoAffiliateEight.exists = true;
+       tierTwoAffiliateEight.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-eight-week"]');
+       tierTwoAffiliateEight.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-eight-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 9) {
+       tierTwoAffiliateNine.exists = true;
+       tierTwoAffiliateNine.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-nine-week"]');
+       tierTwoAffiliateNine.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-nine-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 10) {
+       tierTwoAffiliateTen.exists = true;
+       tierTwoAffiliateTen.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-ten-week"]');
+       tierTwoAffiliateTen.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-ten-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 11) {
+       tierTwoAffiliateEleven.exists = true;
+       tierTwoAffiliateEleven.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-eleven-week"]');
+       tierTwoAffiliateEleven.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-eleven-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 12) {
+       tierTwoAffiliateTwelve.exists = true;
+       tierTwoAffiliateTwelve.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-twelve-week"]');
+       tierTwoAffiliateTwelve.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-twelve-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 13) {
+       tierTwoAffiliateThirteen.exists = true;
+       tierTwoAffiliateThirteen.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-thirteen-week"]');
+       tierTwoAffiliateThirteen.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-thirteen-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 14) {
+       tierTwoAffiliateFourteen.exists = true;
+       tierTwoAffiliateFourteen.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-fourteen-week"]');
+       tierTwoAffiliateFourteen.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-fourteen-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 15) {
+       tierTwoAffiliateFifteen.exists = true;
+       tierTwoAffiliateFifteen.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-fifteen-week"]');
+       tierTwoAffiliateFifteen.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-fifteen-pack"]');
+     }
+     if (parseInt(tierTwoDropdown.value, 10) >= 16) {
+       tierTwoAffiliateSixteen.exists = true;
+       tierTwoAffiliateSixteen.week = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-sixteen-week"]');
+       tierTwoAffiliateSixteen.pack = document.querySelector(
+             '[data-dropdown="tier-two-affiliate-sixteen-pack"]');
+     }
+
+     // combine all tier two affiliates
+     const allTierTwoAffiliates = [
+                                   tierTwoAffiliateOne,
+                                   tierTwoAffiliateTwo,
+                                   tierTwoAffiliateThree,
+                                   tierTwoAffiliateFour,
+                                   tierTwoAffiliateFive,
+                                   tierTwoAffiliateSix,
+                                   tierTwoAffiliateSeven,
+                                   tierTwoAffiliateEight,
+                                   tierTwoAffiliateNine,
+                                   tierTwoAffiliateTen,
+                                   tierTwoAffiliateEleven,
+                                   tierTwoAffiliateTwelve,
+                                   tierTwoAffiliateThirteen,
+                                   tierTwoAffiliateFourteen,
+                                   tierTwoAffiliateFifteen,
+                                   tierTwoAffiliateSixteen
+                                  ];
+
+
+
+
+
+    // CALCULATOR FUNCTIONALITY -------------------------------------------
+
+    // product variables
+    const products = {
+    	dryve: { price: 65, QP: 45, BP: 33 },
+    	vytal: { price: 45, QP: 37, BP: 26 },
+    	probyo: { price: 55, QP: 30, BP: 21 },
+    	trio: { price: 150, QP: 100, BP: 75 },
+		};
+
+    const dryveAmount = document.querySelector('[data-textfield="dryve-amount"]');
+    const vytalAmount = document.querySelector('[data-textfield="vytal-amount"]');
+    const probyoAmount = document.querySelector('[data-textfield="probyo-amount"]');
+    const trioPackAmount = document.querySelector('[data-textfield="trio-pack-amount"]');
+
+    // start pack variables
+    const starterPacks = {
+    	builder: { price: 279, QP: 200, BP: 150, commission: 30 },
+    	premium: { price: 559, QP: 400, BP: 300, commission: 60 },
+    	pro: { price: 999, QP: 750, BP: 600, commission: 120 },
+		};
+
+    // ranks
+    const ranks = [
+      { name: "brand_affiliate", QP: 100 },
+      { name: "sr_brand_affiliate", QP: 500 },
+      { name: "bronze", QP: 1000 },
+      { name: "silver", QP: 3000 },
+      { name: "gold", QP: 5000 },
+      { name: "platinum", QP: 7000 },
+      { name: "pearl", QP: 10000 },
+      { name: "sapphire", QP: 20000 },
+      { name: "ruby", QP: 30000 },
+      { name: "diamond", QP: 50000 },
+      { name: "blue_diamond", QP: 100000 },
+      { name: "green_diamond", QP: 200000 },
+      { name: "red_diamond", QP: 500000 },
+      { name: "black_diamond", QP: 1000000 },
+      { name: "crown_diamond", QP: 2000000 },
+      { name: "royal_crown_diamond", QP: 5000000 },
+    ];
+
+    // OTHER VARIABLES
+
+    // global - track total commissions, QPs, and BPs
+    let totalCommission = 0;
+    let totalQPs = 0;
+    let totalBPs = 0;
+    let weekOneQPs = 0;
+    let weekTwoQPs = 0;
+    let weekThreeQPs = 0;
+    let weekFourQPs = 0;
+    let weekOneBPs = 0;
+    let weekTwoBPs = 0;
+    let weekThreeBPs = 0;
+    let weekFourBPs = 0;
+
+    // calculate the customer commission
+    function calculateCustomerCommission() {
+
+      let dryve = 0;
+      let probyo = 0;
+      let vytal = 0;
+      let trioPack = 0;
+
+      // check and make sure there is a value for each input
+      // if no value, it will be 0
+
+    	// dryve amount
+      if (dryveAmount.value) {
+        dryve = parseInt(dryveAmount.value, 10);
+      }
+
+      // probyo amount
+      if (probyoAmount.value) {
+        probyo = parseInt(probyoAmount.value, 10);
+      }
+
+      // vytal amount
+      if (vytalAmount.value) {
+        vytal = parseInt(vytalAmount.value, 10);
+      }
+
+      // trio pack amount
+      if (trioPackAmount.value) {
+        trioPack = parseInt(trioPackAmount.value, 10);
+      }
+
+      let customerCommission = 0;
+      let customerBPs = 0;
+      let customerQPs = 0;
+
+      // calculate commission from direct sales
+      customerCommission += (dryve * 65) * 0.15;
+      customerCommission += (probyo * 55) * 0.15;
+      customerCommission += (vytal * 45) * 0.15;
+      customerCommission += (trioPack * 150) * 0.15;
+
+      // calculate QPs from direct sales
+      customerQPs += ((dryve * 45) + (vytal * 37) + (probyo * 30) + (trioPack * 100));
+
+      // calculate BPs from direct sales
+      customerBPs += ((dryve * 33) + (vytal * 26) + (probyo * 21) + (trioPack * 75));
+
+      return { customerCommission, customerQPs, customerBPs };
+		}
+
+    // calculate sponsor bonus
+    function calculateSponsorBonus() {
+      // equal to 20% of the bonus points from starter pack
+      // adding up QPs, BPs, and commission
+
+      // find out how many tier one affiliates there are
+      // and what starter pack they enrolled with
+
+      let sponsorCommission = 0;
+      let sponsorQPs = 0;
+      let sponsorBPs = 0;
+
+      // 1-4
+      const numberOfAffiliates = parseInt(tierOneDropdown.value, 10);
+      let x = 0;
+
+      // total up all the commission, QPs, and BPs from all the affiliates
+      while (x < numberOfAffiliates) {
+        let pack = allTierOneAffiliates[x].pack;
+
+        if (pack == 'builder') {
+          sponsorCommission += 30;
+          sponsorQPs += 200;
+          sponsorBPs += 150;
+
+        } else if (pack == 'premium') {
+          sponsorCommission += 60;
+          sponsorQPs += 400;
+          sponsorBPs += 300;
+
+        } else {
+          sponsorCommission += 120;
+          sponsorQPs += 750;
+          sponsorBPs += 600;
+
+        }
+
+        x += 1;
+      }
+
+      return { sponsorCommission, sponsorQPs, sponsorBPs };
+    }
+
+    // builder bonus
+    function calculateBuilderBonus(){
+
+      // RIGHT NOW ASSUMING THIS WILL BE 10% FOR EACH NEW AFFILIATE
+      // GET THE ACTUALY PERCENTAGES
+
+      // need to know how many tier two affiliates were enrolled
+      // if paid as rank is bronze or higher - qualify for builder bonus
+
+      // let user pick rank?
+      const paidAsRank = "bronze";
+
+      // get 10% of all the sponsor bonus that tier one affiliates get
+      // when enrolling tier two affiliates
+
+      // amount of tier two affiliates
+      const tierTwoAffiliatesAmount = parseInt(tierTwoDropdown.value, 10);
+
+      let builderBonusCommission = 0;
+      let builderBonusQPs = 0;
+      let builderBonusBPs = 0;
+
+      // for each tier two affiliate, figure out what pack they enrolled with
+      for (let i = 0; i < tierTwoAffiliatesAmount; i++) {
+        if (allTierTwoAffiliates[i].pack == 'builder') {
+          builderBonusCommission += 30;
+          builderBonusQPs += 200;
+          builderBonusBPs += 150;
+        } else if (allTierTwoAffiliates[i].pack == 'premium') {
+          builderBonusCommission += 60;
+          builderBonusQPs += 400;
+          builderBonusBPs += 300;
+        } else {
+          builderBonusCommission += 120;
+          builderBonusQPs += 750;
+          builderBonusBPs += 650;
+        }
+      }
+
+      builderBonusCommission = builderBonusCommission * 0.10;
+
+      return { builderBonusCommission, builderBonusQPs, builderBonusBPs };
+    }
+
+    // team commission
+    function calculateTeamCommission() {
+      // get 15% of the weak legs BPs
+
+      // make sure it is not over the max amount per week
+      // -- COME BACK TO THE WEEKLY STUFF --
+      // for now it will just be sales period
+      // and I'll check that the total divided by 4 isn't greater than weekly max
+
+
+      // determine weak leg
+      const tierOneAmount = parseInt(tierOneDropdown.value, 10);
+      const tierTwoAmount = parseInt(tierTwoDropdown.value, 10);
+
+      // this will be used to get the commission amount
+      // if there are only 3 tier one affiliates, we ignore number 3 etc.
+      let totalTeamBPs = 0;
+
+      // this will be used to find the actual total amount of BPs from the team
+      let overallTotalBPs = 0;
+      let overallTotalQPs = 0;
+
+      // TIER ONE STUFF
+      // if tier one has 1 affiliate, team commission is 0, uneven legs
+      if (tierOneAmount == 1) {
+        if (tierOneAffiliateOne.pack == 'builder') {
+          overallTotalBPs += 150;
+          overallTotalQPs += 200;
+        } else if (tierOneAffiliateOne.pack == 'premium') {
+          overallTotalBPs += 300;
+          overallTotalQPs += 400;
+        } else {
+          overallTotalBPs += 600;
+          overallTotalQPs += 750;
+        }
+        return {totalTeamBPs, overallTotalQPs, overallTotalBPs};
+      }
+      // if tier one has 2 or 3 affiliates, treat as 2 affiliates
+      else if (tierOneAmount == 2 || tierOneAmount == 3) {
+        // ignore affiliate 3
+        for (i=0; i<2; i++) {
+          if (allTierOneAffiliates[i].pack == 'builder') {
+            totalTeamBPs += 150;
+            overallTotalQPs += 200;
+          } else if (allTierOneAffiliates[i].pack == 'premium') {
+            totalTeamBPs += 300;
+            overallTotalQPs += 400;
+          } else {
+            totalTeamBPs += 600;
+            overallTotalQPs += 750;
+          }
+        }
+        overallTotalBPs += totalTeamBPs;
+        if (tierOneAmount == 3) {
+          if (tierOneAffiliateThree.pack == 'builder') {
+            overallTotalBPs += 150;
+            overallTotalQPs += 200;
+          } else if (tierOneAffiliateThree.pack == 'premium') {
+            overallTotalBPs += 300;
+            overallTotalQPs += 400;
+          } else {
+            overallTotalBPs += 600;
+            overallTotalQPs += 750;
+          }
+        }
+      }
+      // if tier one has 4 affiliates, legs are even
+      else {
+        for (i=0; i<4; i++) {
+          if (allTierOneAffiliates[i].pack == 'builder') {
+            totalTeamBPs += 150;
+            overallTotalQPs += 200;
+          } else if (allTierOneAffiliates[i].pack == 'premium') {
+            totalTeamBPs += 300;
+            overallTotalQPs += 400;
+          } else {
+            totalTeamBPs += 600;
+            overallTotalQPs += 750;
+          }
+        }
+      }
+
+      // TIER TWO STUFF
+
+      // make sure tier two amount is an even number
+      if (tierTwoAmount % 2 != 0) {
+        // if it is an odd number, subtract 1
+        tierTwoAmount -= 1;
+        // if odd number, add the last affiliate points to overall total
+        if (allTierTwoAffiliates[tierTwoAmount].pack == 'builder') {
+          overallTotalBPs += 150;
+          overallTotalQPs += 200;
+        } else if (allTierTwoAffiliates[tierTwoAmount].pack == 'premium') {
+          overallTotalBPs += 300;
+          overallTotalQPs += 400;
+        } else {
+          overallTotalBPs += 600;
+          overallTotalQPs += 750;
+        }
+      }
+
+      // go through all the tier two affiliates and get the BPs
+      // assume that the legs are even right now
+      for (i=0; i<tierTwoAmount; i++) {
+        if (allTierTwoAffiliates[i].pack == 'builder') {
+          totalTeamBPs += 150;
+          overallTotalQPs += 200;
+        } else if (allTierTwoAffiliates[i].pack == 'premium') {
+          totalTeamBPs += 300;
+          overallTotalQPs += 400;
+        } else {
+          totalTeamBPs += 600;
+          overallTotalQPs += 750;
+        }
+      }
+
+      overallTotalBPs += totalTeamBPs;
+
+      // since we are assuming the legs are even at this point
+      // divide the total by 2
+      let weakLegBPs = totalTeamBPs / 2;
+
+      // get 15% of the weak leg BPs and return it
+      let commission = weakLegBPs * 0.15;
+
+      return {commission, overallTotalQPs, overallTotalBPs};
+    }
+
+    // matching commission
+    function calculateMatchingCommission() {
+      return 0;
+    }
+
+    // determine rank
+    function determineRank(rankQPs) {
+
+      // divide by 2 for simplicity
+      rankQPs = rankQPs / 2;
+
+      rank = 'Brand Affiliate';
+
+      // sr brand affiliate
+      if (rankQPs >= 500) {
+        rank = 'Sr Brand Affiliate';
+      }
+
+      // bronze
+      if (rankQPs >= 1000) {
+        rank = 'Bronze';
+      }
+
+      // silver
+      if (rankQPs >= 3000) {
+        rank = 'Silver';
+      }
+
+      // gold
+      if (rankQPs >= 5000) {
+        rank = 'Gold';
+      }
+
+      // platinum
+      if (rankQPs >= 7000) {
+        rank = 'Platinum';
+      }
+
+      // pearl
+      if (rankQPs >= 10000) {
+        rank = 'Pearl';
+      }
+
+      // sapphire
+      if (rankQPs >= 20000) {
+        rank = 'Sapphire';
+      }
+
+      // ruby
+      if (rankQPs >= 30000) {
+        rank = 'Ruby';
+      }
+
+      // diamond
+      if (rankQPs >= 50000) {
+        rank = 'Diamond';
+      }
+
+      // blue diamond
+      if (rankQPs >= 100000) {
+        rank = 'Blue Diamond';
+      }
+
+      // green diamond
+      if (rankQPs >= 200000) {
+        rank = 'Green Diamond';
+      }
+
+      // red diamond
+      if (rankQPs >= 500000) {
+        rank = 'Red Diamond';
+      }
+
+      // black diamond
+      if (rankQPs >= 1000000) {
+        rank = 'Black diamond';
+      }
+
+      // crown diamond
+      if (rankQPs >= 2000000) {
+        rank = 'Crown Diamond';
+      }
+
+      // royal crown diamond
+      if (rankQPs >= 5000000) {
+        rank = 'Royal Crown Diamond';
+      }
+
+      return rank;
+    }
+
+    // booster bonus
+    function calculateBoosterBonus(boosterBonusQPs) {
+
+      // going to just take half of total QPs as an estimate
+      boosterBonusQPs = boosterBonusQPs / 2;
+
+      let bonus = 0;
+
+      // pearl
+      if (boosterBonusQPs >= 10000) {
+        bonus = 550;
+      }
+
+      // sapphire
+      if (boosterBonusQPs >= 20000) {
+        bonus = 650;
+      }
+
+      // ruby
+      if (boosterBonusQPs >= 30000) {
+        bonus = 800;
+      }
+
+      return bonus;
+    }
+
+    // rank bonus
+    function calculateRankBonus(rankBonusQPs) {
+
+      // going to just take half of total QPs as an estimate
+      rankBonusQPs = rankBonusQPs / 2;
+
+      let bonus = 0;
+
+      // diamond
+      if (rankBonusQPs >= 50000) {
+        bonus = 5000;
+      }
+
+      // blue diamond
+      if (rankBonusQPs >= 100000) {
+        bonus = 5000;
+      }
+
+      // green diamond
+      if (rankBonusQPs >= 200000) {
+        bonus = 12500;
+      }
+
+      // red diamond
+      if (rankBonusQPs >= 500000) {
+        bonus = 20000;
+      }
+
+      // black diamond
+      if (rankBonusQPs >= 1000000) {
+        bonus = 50000;
+      }
+
+      // crown diamond
+      if (rankBonusQPs >= 2000000) {
+        bonus = 125000;
+      }
+
+      // royal crown diamond
+      if (rankBonusQPs >= 5000000) {
+        bonus = 200000;
+      }
+
+      return bonus;
+    }
+
+
+
+
+
+    // form submit button clicked
+    submitButton.addEventListener('click', function () {
+
+
+      // customer commission
+      const { customerCommission, customerQPs, customerBPs } = calculateCustomerCommission();
+
+      totalCommission += customerCommission;
+      totalQPs += customerQPs;
+      totalBPs += cusomterBPs;
+
+      // sponsor bonus
+      const { sponsorCommission, sponsorQPs, sponsorBPs } = calculateSponsorBonus();
+
+      totalCommission += sponsorCommission;
+      totalQPs += sponsorQPs;
+      totalBPs += sponsorBPs;
+
+      // builder bonus
+      const { builderBonus, builderBonusQPs, builderBonusBPs } = calculateBuilderBonus();
+
+      totalCommission += builderBonus;
+      totalQPs += builderBonusQPs;
+      totalBPs += builderBonusBPs;
+
+      // team commission
+      const {teamCommissionCommission, teamCommissionQPs, teamCommissionBPs} = calculateTeamCommission();
+      totalCommission += teamCommissionCommission;
+      totalQPs += teamCommissionQPs;
+      totalBPs += teamCommissionBPs;
+
+      // matching commission
+
+
+      // determine rank
+      const rank = determineRank(totalQPs);
+
+
+      // add in either booster bonus or rank bonus, but not both
+      if (rank == 'Pearl' || rank == 'Sapphire' || rank == 'Ruby') {
+
+        // booster bonus
+        totalCommission += calculateBoosterBonus(totalQPs);
+
+      } else if (rank == 'Diamond' || rank == 'Blue Diamond' ||
+                 rank == 'Green Diamond' || rank == 'Red Diamond' ||
+                 rank == 'Black Diamond' || rank == 'Crown Diamond' ||
+                 rank == 'Royal Crown Diamond') {
+
+        // rank bonus
+        totalCommission += calculateRankBonus(totalQPs);
+      }
+
+
+
+
+
+
+      // CHECK TEAM COMMISSIONS TO MAKE SURE THE WEEKLY MAX IS NOT HIT
+
+
+
+      //window.alert(totalCommission);
+      //window.alert(totalQPs);
+      //window.alert(totalBPs);
+
+
+
+      const totalQPsLabel = document.querySelector('[data-text="total-QPs"]');
+      const totalBPsLabel = document.querySelector('[data-text="total-BPs"]');
+      const rankAchievedLabel = document.querySelector('[data-text="rank-achieved"]');
+      const compensationLabel = document.querySelector('[data-text="compensation"]');
+
+      totalQPsLabel.textContent = "Total QPs: " + totalQPs;
+      totalBPsLabel.textContent = "Total BPs: " + totalBPs;
+      rankAchievedLabel.textContent = "Rank Achieved: " + rank;
+      compensationLabel.textContent = "Total Commission: " + totalCommission;
+
+
+		});
+
+
+  });
+
+    </script>
+
+
+
+
+
+
+
+
+{% endblock %}

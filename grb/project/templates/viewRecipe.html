@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>View recipes!</title>
+{% endblock %}
+
+{% block body %}
+
+    <style>
+        .button {
+          background-color: black;
+          color: white;
+          border: none;
+          border-radius: 10px;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          width:100%;
+          margin-top:30px;
+        }
+        button:hover {
+          background-color: white;
+          color: black;
+          border: 1px solid black;
+        }
+        .mainDiv {
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          flex-direction:column;
+        }
+    </style>
+
+    <div class="mainDiv">
+
+      <h1> {{ recipe.title }} </h1>
+      <div>
+          {% autoescape off %}
+          Prep time: {{ prepTime }}<br>
+          Cook time: {{ cookTime }}<br>
+          Combined time: {{ combinedTime }}<br>
+          Servings: {{ recipe.servings }}<br>
+          Ingredients: {{ formattedIngredients }}
+          Instructions: {{ formattedInstructions }}
+          {% endautoescape %}
+      </div>
+
+      <div>
+
+          <a href="/deleteRecipe/{{ recipe.id }}">Delete this recipe</a>
+
+          <button onclick="location.href='{% url 'addRecipe/{{ recipe.id }}' %}'" class="button">
+              Edit this recipe
+          </button>
+
+      </div>
+
+    </div>
+
+{% endblock %}
